@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paadhu — Build Roadmap & Fact Register</title>
+<meta name="robots" content="noindex">
+<style>
+:root{--ink:#16211F;--muted:#55625F;--line:#E4E1D8;--bg:#F7F6F2;--card:#FFFFFF;--acc:#0E6B5C;--accbg:#E9F3F0;--amber:#8A5A00;--ambg:#FFF4DC;--red:#A32D2D;--redbg:#FCEBEB;--green:#2F6B1F;--grbg:#EAF3DE}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--acc)}header{background:var(--ink);color:#F7F6F2}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+.top{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;padding:22px 0}
+.brand{font-weight:700;font-size:22px}.brand span{font-weight:400;color:#9FD4C8;font-size:14px;margin-left:8px}
+.stats{display:flex;gap:10px;flex-wrap:wrap}.stat{background:#22302D;border-radius:10px;padding:8px 14px;min-width:110px}
+.stat b{display:block;font-size:22px}.stat small{color:#A9B5B2}
+nav{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:4px;overflow-x:auto}nav button{border:0;background:none;padding:14px 14px;font:inherit;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent}
+nav button.on{color:var(--acc);border-bottom-color:var(--acc)}
+section{display:none;padding:28px 0 60px}section.on{display:block}
+h2{font-size:22px;margin:0 0 6px}p.lead{color:var(--muted);margin:0 0 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.phase{border-left:4px solid var(--line);border-radius:0;padding-left:16px;margin-bottom:22px}
+.phase.done{border-color:var(--green)}.phase.now{border-color:var(--acc)}.phase.next{border-color:#C9C5B8}
+.phase h3{margin:0 0 4px;font-size:17px}.phase .when{font-size:13px;color:var(--muted);font-weight:600}
+.task{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--line)}
+.task:last-child{border-bottom:0}.task input{margin-top:5px;width:18px;height:18px;accent-color:var(--acc)}
+.who{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:#EFEDE6;color:#3B4744;white-space:nowrap}
+.who.c{background:var(--accbg);color:#0B4F44}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px}
+.p-ready{background:var(--grbg);color:var(--green)}.p-review{background:var(--ambg);color:var(--amber)}.p-risk{background:var(--redbg);color:var(--red)}.p-low{background:var(--accbg);color:#0B4F44}
+.kit h3{margin:4px 0;font-size:17px}.price{font-weight:700;font-size:18px}.price small{font-weight:400;color:var(--muted);font-size:13px}
+.files{font-size:13px;color:var(--muted);margin:8px 0 0;padding-left:18px}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:8px}
+summary{cursor:pointer;padding:12px 14px;display:flex;gap:10px;align-items:center;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary .claim{flex:1;font-weight:600}summary .chk{font-size:12px;font-weight:700;white-space:nowrap}
+.fact-body{padding:0 14px 14px 14px;font-size:14px}.fact-body dl{display:grid;grid-template-columns:140px 1fr;gap:4px 12px;margin:0 0 10px}
+.fact-body dt{color:var(--muted)}.fact-body dd{margin:0}
+.btn{display:inline-block;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:8px 12px;font:inherit;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink);text-decoration:none;margin-right:6px}
+.btn.pri{background:var(--acc);border-color:var(--acc);color:#fff}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.filters select,.filters input{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card)}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{background:var(--accbg)}
+.bar{height:8px;background:#E4E1D8;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--acc)}
+footer{color:var(--muted);font-size:13px;padding:24px 0;border-top:1px solid var(--line)}
+@media(max-width:600px){.fact-body dl{grid-template-columns:1fr}.stat{min-width:90px}}
+</style>
+</head>
+<body>
+<header><div class="wrap top">
+<div class="brand">Paadhu build roadmap<span>last updated 25 Nov 2026</span></div>
+<div class="stats">
+<div class="stat"><b id="sDays">—</b><small>days to DPDP</small></div>
+<div class="stat"><b id="sTasks">—</b><small>tasks done</small></div>
+<div class="stat"><b id="sFacts">—</b><small>facts verified</small></div>
+</div></div></header>
+<nav><div class="wrap" id="tabs">
+<button data-t="road" class="on">Roadmap</button><button data-t="kits">Kits</button><button data-t="facts">Fact register</button><button data-t="dec">Decisions</button><button data-t="flags">Open flags</button>
+</div></nav>
+<main class="wrap">
+
+<section id="road" class="on">
+<h2>Roadmap</h2>
+<p class="lead">Tick tasks as you finish them. Ticks are saved in this browser only. <span class="who">You</span> = Pranav · <span class="who c">Claude</span> = build help.</p>
+<div id="phases"></div>
+</section>
+
+<section id="kits">
+<h2>Kit registry</h2>
+<p class="lead">All 10 kits, English and Tamil. Prices = lowest paid competitor minus 10%; Tamil 20% less. Risk = whether an advocate or CA should review before you claim "reviewed".</p>
+<div class="grid" id="kitGrid"></div>
+</section>
+
+<section id="facts">
+<h2>Fact register</h2>
+<p class="lead">Every date, number and rule the kits depend on. Click a fact to see where it is used and open the source. Mark it verified after you check it yourself.</p>
+<div class="filters">
+<select id="fKit"><option value="">All kits</option></select>
+<select id="fState"><option value="">All</option><option value="todo">Not verified</option><option value="ok">Verified by me</option></select>
+<input id="fQ" type="search" placeholder="Search facts…">
+</div>
+<div id="factList"></div>
+</section>
+
+<section id="dec">
+<h2>Decisions log</h2>
+<p class="lead">What we decided and why, so you don't re-debate it later.</p>
+<table><thead><tr><th>Date</th><th>Decision</th><th>Why</th></tr></thead><tbody id="decBody"></tbody></table>
+</section>
+
+<section id="flags">
+<h2>Open flags</h2>
+<p class="lead">Things that are uncertain or need someone else's check. Clear these before paid launch.</p>
+<div id="flagList"></div>
+</section>
+
+<footer>Paadhu internal roadmap · general guidance, not legal or tax advice · sources open in a new tab</footer>
+</main>
+
+<script>
+const PHASES=[
+ {id:'p1',st:'done',name:'Foundation',when:'Done · 22–25 Nov 2026',tasks:[
+  ['Kit lineup (10 kits) and business architecture','c',1],['DPDP Starter Kit English + Command Center Excel','c',1],
+  ['All 10 kits in English and Tamil (Word + Excel)','c',1],['Pricing from competitor scan','c',1],['Buy paadhu.in and verify email','u',1],
+  ['Website design with early-access form','c',1],['Privacy, Terms, Refund, Contact pages','c',1]]},
+ {id:'p2',st:'now',name:'Go live (early access, no payments)',when:'This week',tasks:[
+  ['Create Cloudflare account, add paadhu.in, change nameservers in Hostinger','u',0],
+  ['Upload paadhu-site.zip to Cloudflare Pages; add paadhu.in and www','u',0],
+  ['Email routing: hello@paadhu.in → Gmail','u',0],['Submit the form once; click FormSubmit activation mail','u',0],
+  ['Morning review of all 10 kits (open each Word and Excel file)','u',0],['Mark kit statuses "Ready" on the website','c',0]]},
+ {id:'p3',st:'next',name:'Pilots and payments',when:'December 2026',tasks:[
+  ['Share on WhatsApp groups, LinkedIn, Instagram','u',0],['3 free pilots: clinic/medical shop, retail, startup','u',0],
+  ['Instamojo (or Razorpay) signup and KYC','u',0],['Zip each kit (EN and TA) for upload; write product descriptions','c',0],
+  ['Add Buy buttons for each kit on the website','c',0],['Collect testimonials with written consent','u',0]]},
+ {id:'p4',st:'next',name:'Dark patterns rule goes live',when:'1 Jan 2027',tasks:[
+  ['Promote Dark Patterns Kit to online sellers before 1 Jan','u',0],['Run the self-audit on paadhu.in itself and display the certificate','u',0]]},
+ {id:'p5',st:'next',name:'Grow',when:'Jan – Apr 2027',tasks:[
+  ['Advocate / CA review of high-risk kits','u',0],['Move to Razorpay when volume grows (2% vs 5%)','u',0],
+  ['Re-verify every fact in the register (quarterly)','u',0],['Update kits for new income-tax forms and TN labour rules','c',0]]},
+ {id:'p6',st:'next',name:'DPDP deadline',when:'13 May 2027',tasks:[['Peak sales push for DPDP Starter Kit','u',0]]}
+];
+const KITS=[
+ ['dpdp','DPDP Starter Kit','₹1,349','₹1,079','high','Paadhu_DPDP_Starter_Kit_EN/TA.docx · Paadhu_DPDP_Command_Center(_TA).xlsx','DPDP Starter Kit\\'],
+ ['web','Website & App Policy Pack','₹1,299','₹1,039','med','Paadhu_Website_Policy_Pack_EN/TA.docx · Paadhu_Website_Policy_Tracker_EN/TA.xlsx','Kits\\Website Policy Pack\\'],
+ ['cal','Startup Compliance Calendar','Free','Free','med','Paadhu_Compliance_Calendar_Guide_EN/TA.docx · Paadhu_Compliance_Calendar_EN/TA.xlsx','Kits\\Compliance Calendar\\'],
+ ['posh','POSH Compliance Kit','₹449','₹359','high','Paadhu_POSH_Kit_EN/TA.docx · Paadhu_POSH_Tracker_EN/TA.xlsx','Kits\\POSH Kit\\'],
+ ['con','Contracts Starter Pack','₹2,249','₹1,799','high','Paadhu_Contracts_Starter_Pack_EN/TA.docx · Paadhu_Contract_Register_EN/TA.xlsx','Kits\\Contracts Starter Pack\\'],
+ ['gst','GST & Invoicing Kit','₹349','₹279','high','Paadhu_GST_Invoicing_Kit_EN/TA.docx · Paadhu_GST_Invoice_Register_EN/TA.xlsx','Kits\\GST & Invoicing Kit\\'],
+ ['lab','Labour Codes Transition Kit','₹1,999','₹1,599','high','Paadhu_Labour_Codes_Kit_EN/TA.docx · Paadhu_Labour_Codes_Tracker_EN/TA.xlsx','Kits\\Labour Codes Kit\\'],
+ ['itx','Income-tax Act 2025 Kit','₹249','₹199','high','Paadhu_IncomeTax2025_Kit_EN/TA.docx · Paadhu_IncomeTax2025_Tracker_EN/TA.xlsx','Kits\\Income-tax 2025 Kit\\'],
+ ['ai','AI Usage Policy Kit','₹299','₹239','low','Paadhu_AI_Usage_Policy_Kit_EN/TA.docx · Paadhu_AI_Tools_Register_EN/TA.xlsx','Kits\\AI Usage Policy Kit\\'],
+ ['dp','Dark Patterns & E-commerce Kit','₹1,499','₹1,199','med','Paadhu_Dark_Patterns_Kit_EN/TA.docx · Paadhu_Dark_Patterns_Audit_EN/TA.xlsx','Kits\\Dark Patterns Kit\\']
+];
+const RISK={high:['Advocate/CA review before claiming reviewed','p-risk'],med:['Self-check, review recommended','p-review'],low:['Low risk','p-low']};
+const F=[
+ ['f1','dpdp','DPDP core duties apply from 13 May 2027','18 months after DPDP Rules notified on 13 Nov 2025','DPDP kit Part 1, website countdown, calendar','https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/nov/doc20251117695301.pdf','PIB, DPDP Rules 2025'],
+ ['f2','dpdp','Breach: inform Board without delay, detailed report within 72 hours','Rule 7, DPDP Rules 2025','DPDP kit Part 6, Breach Log sheet','https://www.barandbench.com/view-point/meity-notifies-final-digital-personal-data-protection-rules-2025','Bar & Bench'],
+ ['f3','dpdp','Rights requests answered within 90 days at most; logs kept at least 1 year','DPDP Rules 2025','DPDP kit Parts 1, 3, 8; Rights Requests sheet','https://www.azbpartners.com/?p=87811','AZB & Partners'],
+ ['f4','dpdp','Max penalties ₹250 cr / ₹200 cr / ₹200 cr / ₹50 cr','DPDP Act Schedule','DPDP kit Part 1, website hero','https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/nov/doc20251117695301.pdf','PIB'],
+ ['f5','web','E-Commerce Rules 2020: grievance officer, 48h acknowledge, 1 month resolve','In force 23 Jul 2020','Website pack, Grievance Log','https://consumeraffairs.nic.in/','Dept of Consumer Affairs'],
+ ['f6','dp','E-Commerce Amendment Rules 2026 in force 1 Jan 2027 (G.S.R. 789(E), notified 9 Sep 2026)','Rule 4(13) prior price, Rule 4(15) dark-pattern self-audit + certificate','Dark Patterns kit, Website pack, Calendar','https://sjexim.services/2026/09/11/consumer-protection-e-commerce-amendment-rules-2026-new-norms-on-rankings-dark-patterns-discounts-and-seller-transparency/','SJ Exim summary — check gazette'],
+ ['f7','dp','Prior price = lowest price in preceding 30 days','Rule 4(13)','Dark Patterns kit Part 4, Prior Price sheet','https://www.lexology.com/library/detail.aspx?g=0640f476-8419-4c33-a18a-f59b600884a7','Lexology'],
+ ['f8','ai','IT Rules amendment on synthetically generated info: G.S.R. 120(E), in force 20 Feb 2026; audio/visual only','Labelling of AI audio, images, video','AI Policy kit Part 1','https://www.barandbench.com/news/law-policy/centre-amends-it-rules-to-regulate-ai-generated-content-takedown-timelines-reduced','Bar & Bench'],
+ ['f9','ai','India AI Governance Guidelines released 5 Nov 2025','No AI-specific law; sector regulators','AI Policy kit Part 1','https://negd.gov.in/wp-content/uploads/2025/11/Press-Release_Press-Information-Bureau3.pdf','PIB'],
+ ['f10','posh','IC mandatory at 10+ employees; penalty up to ₹50,000','POSH Act 2013 ss. 4, 26','POSH kit Part 1','https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/feb/doc2026212787301.pdf','PIB Feb 2026'],
+ ['f11','posh','Tamil Nadu POSH SOP issued 18 Jun 2025; District Collectors are District Officers','TN Social Welfare Dept','POSH kit Part 5','https://www.jsalaw.com/?p=54381','JSA Prism'],
+ ['f12','posh','Companies: POSH figures in Board report from 14 Jul 2025','Companies (Accounts) Amendment Rules','POSH kit Part 5','https://knowledge.dlapiper.com/dlapiperknowledge/globalemploymentlatestdevelopments/2025/workplace-harassment-rules-tightened','DLA Piper'],
+ ['f13','con','TN stamp duty: agreement not otherwise provided for ₹200 (from 3 May 2024)','Article 5(j), Indian Stamp (TN Amendment) Act 2023','Contracts kit Part 1, Contract Register','https://www.jsalaw.com/newsletters-and-updates/recent-amendments-made-to-the-stamp-duty-payable-on-various-instruments-in-tamil-nadu','JSA'],
+ ['f14','gst','GST 2.0: slabs 5% / 18% / 40% from 22 Sep 2025','56th GST Council, 3 Sep 2025','GST kit Part 1, Invoice Register rates','https://cleartax.in/s/gst-rates','ClearTax'],
+ ['f15','gst','30-day e-invoice reporting for AATO ₹10 cr+ from 1 Apr 2025; e-invoice at AATO > ₹5 cr','GSTN advisory','GST kit Part 3','https://www.bajajfinserv.in/gst-news-and-updates','Bajaj Finserv summary'],
+ ['f16','gst','GST returns cannot be filed after 3 years from due date','Finance Act 2022; portal enforcement','GST kit Parts 1, 5','https://irisgst.com/gst-changes-from-april-2026-key-gst-updates-every-business-must-know/','IRIS GST'],
+ ['f17','itx','Income-tax Act 2025 in force 1 Apr 2026; "Tax Year" replaces PY/AY','536 sections','Income-tax kit, Calendar','https://en.wikipedia.org/wiki/Income-tax_Act,_2025','Overview — confirm on incometax.gov.in'],
+ ['f18','itx','192→392; 194C/194J/194-I→393 table; 206C→394; 80C→123; 44AD→58','Section mapping','Income-tax kit Part 2, Section Finder','https://taxcalculator.in/income-tax-act-2025-section-mapping.php','taxcalculator.in'],
+ ['f19','itx','TDS thresholds: 194J ₹50,000/yr; rent ₹50,000/month; contractor ₹30,000/₹1,00,000','Budget 2025 thresholds','Income-tax kit Part 3, TDS Register','https://onefinops.com/blog/section-194-to-393-tds-mapping-guide-fy-2026-27','OneFinOps'],
+ ['f20','lab','Labour Codes effective 21 Nov 2025; Central Rules 8 May 2026','Four codes','Labour kit Part 1','https://labour.gov.in/','Ministry of Labour'],
+ ['f21','lab','PF wage ceiling ₹25,000 from 17 Sep 2026 (S.O. 5109(E))','EPF Scheme 2026','Labour kit, Staff & Wages sheet','https://www.epfindia.gov.in/','EPFO'],
+ ['f22','lab','Wages by 7th of next month; final settlement within 2 working days','Code on Wages s.17','Labour kit, Exits sheet, Contracts employment template','https://labour.gov.in/','Ministry of Labour'],
+ ['f23','cal','GSTR-1 11th, GSTR-3B 20th (TN QRMP 22nd), PMT-06 25th','GST due dates','Calendar Excel','https://www.gst.gov.in/','GST portal'],
+ ['f24','cal','DIR-3 KYC once every 3 financial years by 30 June','G.S.R. 943(E), 31 Dec 2025','Calendar Excel','https://www.mca.gov.in/','MCA'],
+ ['f25','cal','TN Professional Tax due 30 Sep / 31 Mar (Trichy Corp says 1 Apr / 1 Oct)','Conflicting sources','Calendar Excel','https://www.google.com/search?q=Tiruchirappalli+Corporation+professional+tax+half+year+due+date','Trichy Corporation'],
+ ['f26','pay','Razorpay domestic 2% + GST; new-merchant 0% offer for activation from 1 Jul 2026','Pricing','Decisions','https://razorpay.com/blog/razorpay-0-percent-platform-fee-offer-90-days-new-merchants-2026/','Razorpay blog'],
+ ['f27','pay','Instamojo digital products 5% + ₹3, auto file delivery','Pricing','Decisions','https://instamojo.zendesk.com/hc/en-us/articles/208482245-Instamojo-Transaction-Fees-No-Setup-or-Maintenance-Fees','Instamojo help'],
+ ['f28','pay','GitHub Pages not allowed for e-commerce sites','GitHub docs','Decisions (host shop on Cloudflare)','https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits','GitHub Docs']
+];
+const DEC=[
+ ['22 Nov 2026','10-kit lineup: 5 running, 3 old→new, 2 new','Covers DPDP plus everyday compliance so one brand serves many segments'],
+ ['24 Nov 2026','Tamil edition of every kit, priced 20% less','Reach Tamil-first owners; differentiate from English-only competitors'],
+ ['24 Nov 2026','Price = lowest paid competitor − 10%','Simple, defensible rule; free calendar used as lead magnet'],
+ ['24 Nov 2026','Buy only paadhu.in for now (Hostinger, 1 year)','Lowest cost while validating; .com can be added later'],
+ ['24 Nov 2026','Host the shop site on Cloudflare Pages, code on GitHub','GitHub Pages forbids e-commerce; Cloudflare allows custom domain + email routing'],
+ ['25 Nov 2026','Start payments with Instamojo, move to Razorpay later','Instamojo auto-delivers files; Razorpay cheaper at volume'],
+ ['25 Nov 2026','Grievance officer: Pranav Kanna, Founder, hello@paadhu.in','IT Rules require a named grievance officer; no phone number published']
+];
+const FLAGS=[
+ ['High','TN Professional Tax due dates conflict (30 Sep/31 Mar vs Trichy 1 Apr/1 Oct)','Call Trichy Corporation PT section; update Calendar'],
+ ['High','Income-tax 393 table serial numbers differ across guides','Use neutral wording in contracts; confirm on incometax.gov.in mapping utility'],
+ ['High','TN Labour Code rules still in draft','Recheck monthly; update Labour kit when final'],
+ ['Medium','E-Commerce Amendment 2026 details from secondary summaries','Download G.S.R. 789(E) gazette PDF and compare'],
+ ['Medium','POSH annual report date varies by district','Check Trichy District Collector notification'],
+ ['Medium','New ITR / TDS form numbers for Tax Year 2026-27','Update Calendar and Income-tax kit when released'],
+ ['Low','Tamil docs not visually checked (fonts missing on build machine)','Open each _TA.docx in Word; font Nirmala UI'],
+ ['Low','Razorpay may require a registered business for its offer','Check during signup; Instamojo first']
+];
+const S=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const G=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}};
+let done=G('pd_tasks',{}),ver=G('pd_facts',{});
+const esc=s=>String(s).replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));
+function stats(){
+ const d=new Date(2027,4,13),t=new Date();t.setHours(0,0,0,0);document.getElementById('sDays').textContent=Math.max(0,Math.round((d-t)/864e5));
+ let n=0,m=0;PHASES.forEach(p=>p.tasks.forEach((x,i)=>{n++;if(done[p.id+i]??x[2])m++}));document.getElementById('sTasks').textContent=m+'/'+n;
+ document.getElementById('sFacts').textContent=F.filter(f=>ver[f[0]]).length+'/'+F.length;
+}
+function renderPhases(){
+ document.getElementById('phases').innerHTML=PHASES.map(p=>{
+  const tot=p.tasks.length,dn=p.tasks.filter((x,i)=>done[p.id+i]??x[2]).length;
+  return `<div class="phase ${p.st}"><div class="when">${esc(p.when)}</div><h3>${esc(p.name)}</h3>
+  <div class="bar" style="margin:6px 0 8px;max-width:260px"><i style="width:${Math.round(dn/tot*100)}%"></i></div>
+  ${p.tasks.map((x,i)=>`<label class="task"><input type="checkbox" data-k="${p.id+i}" ${(done[p.id+i]??x[2])?'checked':''}><span style="flex:1">${esc(x[0])}</span><span class="who ${x[1]==='c'?'c':''}">${x[1]==='c'?'Claude':'You'}</span></label>`).join('')}</div>`}).join('');
+ document.querySelectorAll('#phases input').forEach(cb=>cb.onchange=()=>{done[cb.dataset.k]=cb.checked;S('pd_tasks',done);renderPhases();stats()});
+}
+function renderKits(){
+ document.getElementById('kitGrid').innerHTML=KITS.map(k=>{const r=RISK[k[4]];const fc=F.filter(f=>f[1]===k[0]);const fv=fc.filter(f=>ver[f[0]]).length;
+ return `<div class="card kit"><span class="pill p-ready">EN + TA ready</span> <span class="pill ${r[1]}">${r[0]}</span>
+ <h3>${esc(k[1])}</h3><div class="price">${k[2]} <small>Tamil ${k[3]}</small></div>
+ <ul class="files"><li>${esc(k[5])}</li><li>Folder: Documents\\Paadhu\\${esc(k[6])}</li></ul>
+ <p style="margin:10px 0 0;font-size:13px">Facts verified: <b>${fv}/${fc.length}</b> · <a href="#" data-kit="${k[0]}">check facts →</a></p></div>`}).join('');
+ document.querySelectorAll('[data-kit]').forEach(a=>a.onclick=e=>{e.preventDefault();document.getElementById('fKit').value=a.dataset.kit;show('facts');renderFacts()});
+}
+function renderFacts(){
+ const kf=document.getElementById('fKit').value,st=document.getElementById('fState').value,q=document.getElementById('fQ').value.toLowerCase();
+ const list=F.filter(f=>(!kf||f[1]===kf)&&(!st||(st==='ok'?ver[f[0]]:!ver[f[0]]))&&(!q||f.join(' ').toLowerCase().includes(q)));
+ const kn=Object.fromEntries(KITS.map(k=>[k[0],k[1]]));kn.pay='Payments & hosting';
+ document.getElementById('factList').innerHTML=list.length?list.map(f=>`<details><summary><span class="claim">${esc(f[2])}</span><span class="chk" style="color:${ver[f[0]]?'var(--green)':'var(--amber)'}">${ver[f[0]]?'✓ verified '+esc(ver[f[0]]):'not verified'}</span></summary>
+ <div class="fact-body"><dl><dt>Kit</dt><dd>${esc(kn[f[1]]||f[1])}</dd><dt>Basis</dt><dd>${esc(f[3])}</dd><dt>Used in</dt><dd>${esc(f[4])}</dd><dt>Source</dt><dd>${esc(f[6])}</dd></dl>
+ <a class="btn pri" href="${esc(f[5])}" target="_blank" rel="noopener">Open source ↗</a>
+ <button class="btn" data-v="${f[0]}">${ver[f[0]]?'Undo verified':'Mark verified'}</button></div></details>`).join(''):'<p class="lead">No facts match.</p>';
+ document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{const id=b.dataset.v;if(ver[id])delete ver[id];else ver[id]=new Date().toLocaleDateString('en-IN');S('pd_facts',ver);renderFacts();renderKits();stats()});
+}
+function renderStatic(){
+ document.getElementById('decBody').innerHTML=DEC.map(d=>`<tr><td style="white-space:nowrap">${esc(d[0])}</td><td><b>${esc(d[1])}</b></td><td>${esc(d[2])}</td></tr>`).join('');
+ const c={High:'p-risk',Medium:'p-review',Low:'p-low'};
+ document.getElementById('flagList').innerHTML=FLAGS.map(f=>`<div class="card" style="margin-bottom:10px"><span class="pill ${c[f[0]]}">${f[0]}</span> <b>${esc(f[1])}</b><p style="margin:6px 0 0;color:var(--muted)">Next step: ${esc(f[2])}</p></div>`).join('');
+ const sel=document.getElementById('fKit');KITS.forEach(k=>sel.insertAdjacentHTML('beforeend',`<option value="${k[0]}">${esc(k[1])}</option>`));sel.insertAdjacentHTML('beforeend','<option value="pay">Payments & hosting</option>');
+}
+function show(t){document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===t));}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>show(b.dataset.t));
+['fKit','fState'].forEach(i=>document.getElementById(i).onchange=renderFacts);document.getElementById('fQ').oninput=renderFacts;
+renderStatic();renderPhases();renderKits();renderFacts();stats();
+</script>
+</body>
+</html>
